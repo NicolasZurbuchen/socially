@@ -32,35 +32,35 @@ import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
 import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
 import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
-import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignInState
+import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 
 @Composable
-fun LoginSignInScreen(
+fun LoginSignUpScreen(
     navController: NavController,
-    viewModel: LoginSignInViewModel = hiltViewModel(),
+    viewModel: LoginSignUpViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
 
-    LoginSignInScreenContent(
+    LoginSignUpScreenContent(
         state = state,
+        onUsernameValueChange = { viewModel.updateUsername(it) },
         onEmailValueChange = { viewModel.updateEmail(it) },
         onPasswordValueChange = { viewModel.updatePassword(it) },
         onPasswordVisibilityToggle = { viewModel.togglePasswordVisibility() },
-        onForgetPasswordClick = { /* TODO */ },
-        onSignInClick = { viewModel.signIn() },
-        onCreateAccountClick = { navController.navigate(Screen.LoginSignUpScreen.route) },
+        onSignUpClick = { viewModel.signUp() },
+        onHaveAccountClick = { navController.navigate(Screen.LoginSignInScreen.route) },
     )
 }
 
 @Composable
-fun LoginSignInScreenContent(
-    state: LoginSignInState,
+fun LoginSignUpScreenContent(
+    state: LoginSignUpState,
+    onUsernameValueChange: (String) -> Unit,
     onEmailValueChange: (String) -> Unit,
     onPasswordValueChange: (String) -> Unit,
     onPasswordVisibilityToggle: () -> Unit,
-    onForgetPasswordClick: () -> Unit,
-    onSignInClick: () -> Unit,
-    onCreateAccountClick: () -> Unit,
+    onSignUpClick: () -> Unit,
+    onHaveAccountClick: () -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -71,10 +71,26 @@ fun LoginSignInScreenContent(
                 .padding(horizontal = dimensionResource(R.dimen.padding_l)),
         ) {
             Text(
-                text = stringResource(R.string.login_sign_in_title),
+                text = stringResource(R.string.login_sign_up_title),
                 style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.padding_xl)),
+                    .padding(top = dimensionResource(R.dimen.padding_xl))
+            )
+
+            SociallyTextField(
+                value = state.username,
+                onValueChange = onUsernameValueChange,
+                placeholder = stringResource(R.string.login_username),
+                leadingIcon = painterResource(state.usernameIcon),
+                supportingText = state.usernameError,
+                isError = state.isUsernameError,
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Text,
+                    imeAction = ImeAction.Next
+                ),
+                modifier = Modifier
+                    .padding(top = dimensionResource(R.dimen.padding_lh))
+                    .height(dimensionResource(R.dimen.socially_text_field_height))
             )
 
             SociallyTextField(
@@ -89,8 +105,8 @@ fun LoginSignInScreenContent(
                     imeAction = ImeAction.Next
                 ),
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.padding_lh))
-                    .height(dimensionResource(R.dimen.socially_text_field_height)),
+                    .padding(top = dimensionResource(R.dimen.padding_s))
+                    .height(dimensionResource(R.dimen.socially_text_field_height))
             )
 
             SociallyTextField(
@@ -109,43 +125,26 @@ fun LoginSignInScreenContent(
                 onPasswordVisibilityToggle = onPasswordVisibilityToggle,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_s))
-                    .height(dimensionResource(R.dimen.socially_text_field_height)),
+                    .height(dimensionResource(R.dimen.socially_text_field_height))
             )
 
-            Box(
-                contentAlignment = Alignment.CenterEnd,
-                modifier = Modifier
-                    .fillMaxWidth(),
-            ) {
-                Text(
-                    text = stringResource(R.string.login_forgot_password),
-                    style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier
-                        .background(
-                            color = Color.Transparent,
-                            shape = MaterialTheme.shapes.extraSmall,
-                        )
-                        .clickable { onForgetPasswordClick() },
-                )
-            }
-
             SociallyButtonPrimary(
-                text = stringResource(R.string.login_sign_in),
+                text = stringResource(R.string.login_sign_up),
                 onClick = {
                     keyboardController?.hide()
-                    onSignInClick()
+                    onSignUpClick()
                 },
-                enabled = state.isSignInButtonEnabled,
+                enabled = state.isSignUpButtonEnabled,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_l))
-                    .height(dimensionResource(R.dimen.socially_button_height)),
+                    .height(dimensionResource(R.dimen.socially_button_height))
             )
 
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_m))
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
@@ -155,10 +154,10 @@ fun LoginSignInScreenContent(
                             color = Color.Transparent,
                             shape = MaterialTheme.shapes.extraSmall,
                         )
-                        .clickable { onCreateAccountClick() },
+                        .clickable { onHaveAccountClick() },
                 ) {
                     Text(
-                        text = stringResource(R.string.login_create_account),
+                        text = stringResource(R.string.login_have_account),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         style = MaterialTheme.typography.labelMedium,
                     )
@@ -166,7 +165,7 @@ fun LoginSignInScreenContent(
                         text = stringResource(R.string.login_sign_up),
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier
-                            .padding(start = dimensionResource(R.dimen.padding_xs)),
+                            .padding(start = dimensionResource(R.dimen.padding_xs))
                     )
                 }
             }

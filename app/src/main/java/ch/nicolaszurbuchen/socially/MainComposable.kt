@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignInScreen
+import ch.nicolaszurbuchen.socially.login.presentation.LoginSignUpScreen
 
 @Composable
 fun MainComposable(
@@ -21,13 +22,23 @@ fun MainComposable(
     ) {
         NavHost(
             navController = navController,
-            startDestination = "login_sign_in",
+            startDestination = Screen.LoginSignInScreen.route,
         ) {
-            composable("login_sign_in") {
+            composable(Screen.LoginSignInScreen.route) {
                 LoginSignInScreen(
+                    navController = navController,
+                )
+            }
+            composable(Screen.LoginSignUpScreen.route) {
+                LoginSignUpScreen(
                     navController = navController,
                 )
             }
         }
     }
+}
+
+sealed class Screen(val route: String) {
+    data object LoginSignInScreen : Screen("login_sign_in")
+    data object LoginSignUpScreen : Screen("login_sign_up")
 }

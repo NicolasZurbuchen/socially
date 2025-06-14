@@ -1,10 +1,10 @@
 package ch.nicolaszurbuchen.socially.common.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
@@ -20,10 +20,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
 
 @Composable
@@ -31,7 +33,7 @@ fun SociallyTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    leadingIcon: ImageVector,
+    leadingIcon: Painter,
     modifier: Modifier = Modifier,
     supportingText: String? = null,
     isError: Boolean = false,
@@ -50,7 +52,7 @@ fun SociallyTextField(
         value = value,
         onValueChange = onValueChange,
         placeholder = { Text(placeholder) },
-        leadingIcon = { Icon(leadingIcon, "") },
+        leadingIcon = { Image(leadingIcon, null) },
         trailingIcon = {
             if (isPassword) {
                 IconButton(
@@ -89,7 +91,7 @@ private fun SociallyTextFieldPreview() {
             value = value,
             onValueChange = { value = it },
             placeholder = "Username",
-            leadingIcon = Icons.Default.Person,
+            leadingIcon = painterResource(R.drawable.ic_user_on),
         )
     }
 }
