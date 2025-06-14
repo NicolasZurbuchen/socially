@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ch.nicolaszurbuchen.socially.login.presentation.LoginResetPasswordScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignInScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignUpScreen
 import ch.nicolaszurbuchen.socially.timeline.presentation.TimelineHomeScreen
@@ -35,6 +36,11 @@ fun MainComposable(
                     navController = navController,
                 )
             }
+            composable(Screen.LoginResetPassword.route) {
+                LoginResetPasswordScreen(
+                    navController = navController,
+                )
+            }
             composable(Screen.TimelineHomeScreen.route) {
                 TimelineHomeScreen(
                     navController = navController,
@@ -47,5 +53,6 @@ fun MainComposable(
 sealed class Screen(val route: String) {
     data object LoginSignInScreen : Screen("login_sign_in")
     data object LoginSignUpScreen : Screen("login_sign_up")
+    data object LoginResetPassword : Screen("login_password_reset")
     data object TimelineHomeScreen : Screen("timeline_home")
 }

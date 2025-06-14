@@ -47,11 +47,11 @@ fun LoginSignUpScreen(
 
     LoginSignUpScreenContent(
         state = state,
-        onUsernameValueChange = { viewModel.updateUsername(it) },
-        onEmailValueChange = { viewModel.updateEmail(it) },
-        onPasswordValueChange = { viewModel.updatePassword(it) },
-        onPasswordVisibilityToggle = { viewModel.togglePasswordVisibility() },
-        onSignUpClick = { viewModel.signUp() },
+        onUsernameValueChange = viewModel::updateUsername,
+        onEmailValueChange = viewModel::updateEmail,
+        onPasswordValueChange = viewModel::updatePassword,
+        onPasswordVisibilityToggle = viewModel::togglePasswordVisibility,
+        onSignUpClick = viewModel::signUp,
         onHaveAccountClick = { navController.navigate(Screen.LoginSignInScreen.route) },
     )
 }
@@ -140,7 +140,7 @@ fun LoginSignUpScreenContent(
                 },
                 enabled = state.isSignUpButtonEnabled,
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.padding_l))
+                    .padding(top = dimensionResource(R.dimen.padding_s))
                     .height(dimensionResource(R.dimen.socially_button_height))
             )
 
@@ -166,7 +166,7 @@ fun LoginSignUpScreenContent(
                         style = MaterialTheme.typography.labelMedium,
                     )
                     Text(
-                        text = stringResource(R.string.login_sign_up),
+                        text = stringResource(R.string.login_sign_in),
                         style = MaterialTheme.typography.labelLarge,
                         modifier = Modifier
                             .padding(start = dimensionResource(R.dimen.padding_xs))

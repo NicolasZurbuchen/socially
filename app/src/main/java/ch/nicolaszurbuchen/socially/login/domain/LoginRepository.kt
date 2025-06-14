@@ -5,4 +5,6 @@ interface LoginRepository {
     suspend fun signUp(username: String, email: String, password: String): Result<Unit>
 
     suspend fun signIn(email: String, password: String): Result<Unit>
+
+    suspend fun resetPassword(email: String): Result<Unit>
 }

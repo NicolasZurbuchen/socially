@@ -17,6 +17,11 @@ val Typography = Typography(
         fontWeight = FontWeight.SemiBold,
         fontSize = 18.sp,
     ),
+    titleSmall = TextStyle( // Smaller subtitles or item titles
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    ),
     bodyLarge = TextStyle( // Main body text
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Light,

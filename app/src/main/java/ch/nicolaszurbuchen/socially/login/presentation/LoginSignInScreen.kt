@@ -47,11 +47,11 @@ fun LoginSignInScreen(
 
     LoginSignInScreenContent(
         state = state,
-        onEmailValueChange = { viewModel.updateEmail(it) },
-        onPasswordValueChange = { viewModel.updatePassword(it) },
-        onPasswordVisibilityToggle = { viewModel.togglePasswordVisibility() },
-        onForgetPasswordClick = { /* TODO */ },
-        onSignInClick = { viewModel.signIn() },
+        onEmailValueChange = viewModel::updateEmail,
+        onPasswordValueChange = viewModel::updatePassword,
+        onPasswordVisibilityToggle = viewModel::togglePasswordVisibility,
+        onForgetPasswordClick = { navController.navigate(Screen.LoginResetPassword.route) },
+        onSignInClick = viewModel::signIn,
         onCreateAccountClick = { navController.navigate(Screen.LoginSignUpScreen.route) },
     )
 }
