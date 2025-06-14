@@ -2,10 +2,16 @@ package ch.nicolaszurbuchen.socially.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val DarkPrimary = Color(0xFF6C5FBC)
+val DarkOnPrimary = Color(0xFFFFFFFF)
+val DarkSecondary = Color(0xFFDBD9EE)
+val DarkOnSecondary = Color(0xFF6C5FBC)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val LightPrimary = Color(0xFF6C5FBC)
+val LightOnPrimary = Color(0xFFFFFFFF)
+val LightSecondary = Color(0xFFDBD9EE)
+val LightOnSecondary = Color(0xFF6C5FBC)
+val LightBackground = Color(0xFFF3F5F6)
+val LightOnBackground = Color(0xFFACADB9)
+val LightSurface = Color(0xFFFFFFFF)
+val LightOnSurface = Color(0xFF323142)
