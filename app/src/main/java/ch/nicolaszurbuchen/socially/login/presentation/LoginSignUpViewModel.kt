@@ -1,17 +1,19 @@
 package ch.nicolaszurbuchen.socially.login.presentation
 
 import androidx.lifecycle.ViewModel
-import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignInState
+import androidx.lifecycle.viewModelScope
+import ch.nicolaszurbuchen.socially.login.domain.LoginSignUpUseCase
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginSignUpViewModel @Inject constructor(
-
+    private val signUpUseCase: LoginSignUpUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(LoginSignUpState())
@@ -35,8 +37,20 @@ class LoginSignUpViewModel @Inject constructor(
     }
 
     fun signUp() {
-        _state.update { it.copy(isLoading = true) }
+        val state = _state.value
 
-        // TODO
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true) }
+
+            val result = signUpUseCase(state.username, state.email, state.password)
+
+            _state.update {
+                if (result.isSuccess) {
+                    it.copy(isLoading = false, success = true)
+                } else {
+                    it.copy(isLoading = false)
+                }
+            }
+        }
     }
 }

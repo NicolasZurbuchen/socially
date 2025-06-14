@@ -41,6 +41,10 @@ fun LoginSignUpScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    if (state.success) {
+        navController.navigate(Screen.TimelineHomeScreen.route)
+    }
+
     LoginSignUpScreenContent(
         state = state,
         onUsernameValueChange = { viewModel.updateUsername(it) },

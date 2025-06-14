@@ -41,6 +41,10 @@ fun LoginSignInScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    if (state.success) {
+        navController.navigate(Screen.TimelineHomeScreen.route)
+    }
+
     LoginSignInScreenContent(
         state = state,
         onEmailValueChange = { viewModel.updateEmail(it) },
