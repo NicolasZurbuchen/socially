@@ -3,11 +3,11 @@ package ch.nicolaszurbuchen.socially.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.nicolaszurbuchen.socially.R
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignUpUseCase
+import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
 import ch.nicolaszurbuchen.socially.common.utils.Field
 import ch.nicolaszurbuchen.socially.common.utils.Resource
 import ch.nicolaszurbuchen.socially.common.utils.ValidationErrors
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignUpUseCase
-import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

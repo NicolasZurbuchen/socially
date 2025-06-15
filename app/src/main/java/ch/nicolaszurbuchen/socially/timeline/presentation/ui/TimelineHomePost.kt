@@ -25,9 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import ch.nicolaszurbuchen.socially.R
-import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
 import ch.nicolaszurbuchen.socially.common.theme.SociallyTheme
 import ch.nicolaszurbuchen.socially.common.utils.toReadableDate
+import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
 import coil.compose.SubcomposeAsyncImage
 
 @Composable

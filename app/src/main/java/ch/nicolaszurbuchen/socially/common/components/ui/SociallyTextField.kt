@@ -87,6 +87,7 @@ fun SociallyTextField(
             unfocusedIndicatorColor = Color.Transparent,
             unfocusedContainerColor = MaterialTheme.colorScheme.surface,
             focusedContainerColor = MaterialTheme.colorScheme.surface,
+            errorContainerColor = MaterialTheme.colorScheme.errorContainer,
         ),
         modifier = modifier
             .fillMaxWidth(),

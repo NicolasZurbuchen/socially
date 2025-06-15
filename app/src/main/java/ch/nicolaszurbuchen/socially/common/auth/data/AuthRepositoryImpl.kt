@@ -1,9 +1,9 @@
 package ch.nicolaszurbuchen.socially.common.auth.data
 
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
 import ch.nicolaszurbuchen.socially.common.utils.DomainError
 import ch.nicolaszurbuchen.socially.common.utils.FirebaseErrorType
 import ch.nicolaszurbuchen.socially.common.utils.Resource
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
 import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

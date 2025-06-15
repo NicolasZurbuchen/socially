@@ -3,10 +3,10 @@ package ch.nicolaszurbuchen.socially.login.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.nicolaszurbuchen.socially.R
-import ch.nicolaszurbuchen.socially.common.utils.DomainError
-import ch.nicolaszurbuchen.socially.common.utils.Resource
 import ch.nicolaszurbuchen.socially.common.auth.domain.AuthResetPasswordUseCase
 import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
+import ch.nicolaszurbuchen.socially.common.utils.DomainError
+import ch.nicolaszurbuchen.socially.common.utils.Resource
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginResetPasswordState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
