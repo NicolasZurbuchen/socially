@@ -76,7 +76,7 @@ fun IntroWelcomeScreenContent(
                 shape = CircleShape,
                 modifier = Modifier
                     .align(Alignment.End)
-                    .size(dimensionResource(R.dimen.socially_intro_welcome_button_size))
+                    .size(dimensionResource(R.dimen.size_level_7))
             )
         }
     }

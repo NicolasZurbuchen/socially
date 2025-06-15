@@ -139,7 +139,6 @@ fun TimelineNewPostContent(
     onPostChange: (String) -> Unit,
     onPost: () -> Unit,
 ) {
-    val scrollable = rememberScrollState()
     val bringIntoViewRequester = remember { BringIntoViewRequester() }
     val coroutineScope = rememberCoroutineScope()
 
@@ -167,7 +166,7 @@ fun TimelineNewPostContent(
     ) { paddingValues ->
         Column(
             modifier = Modifier
-                .verticalScroll(scrollable)
+                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
                 .padding(dimensionResource(R.dimen.padding_l))
         ) {
@@ -178,7 +177,7 @@ fun TimelineNewPostContent(
                         shape = MaterialTheme.shapes.medium,
                     )
                     .fillMaxWidth()
-                    .height(dimensionResource(R.dimen.socially_post_default_image_height)),
+                    .height(dimensionResource(R.dimen.size_level_20)),
             ) {
                 if (state.isImageUploaded) {
                     Box(
@@ -198,7 +197,7 @@ fun TimelineNewPostContent(
                             enabled = state.interactionEnabled,
                             shape = CircleShape,
                             modifier = Modifier
-                                .size(dimensionResource(R.dimen.socially_floating_button_size))
+                                .size(dimensionResource(R.dimen.size_level_4))
                                 .padding(
                                     end = dimensionResource(R.dimen.padding_s),
                                     bottom = dimensionResource(R.dimen.padding_s),
@@ -220,7 +219,7 @@ fun TimelineNewPostContent(
                             painter = painterResource(R.drawable.img_image_placeholder),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(dimensionResource(R.dimen.socially_post_placeholder_image_height)),
+                                .size(dimensionResource(R.dimen.size_level_7)),
                         )
                         Text(
                             text = stringResource(R.string.timeline_new_post_upload_image),
@@ -253,7 +252,7 @@ fun TimelineNewPostContent(
                 placeholder = stringResource(R.string.timeline_new_post_type_here),
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_s))
-                    .defaultMinSize(minHeight = dimensionResource(R.dimen.socially_text_field_height))
+                    .defaultMinSize(minHeight = dimensionResource(R.dimen.size_level_9))
                     .bringIntoViewRequester(bringIntoViewRequester),
             )
 
@@ -263,7 +262,7 @@ fun TimelineNewPostContent(
                 enabled = state.isPostButtonEnabled,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_m))
-                    .height(dimensionResource(R.dimen.socially_button_height)),
+                    .height(dimensionResource(R.dimen.size_level_7)),
             )
 
             if (state.isLoading) {

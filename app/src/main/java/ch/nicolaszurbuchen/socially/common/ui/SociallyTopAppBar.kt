@@ -30,7 +30,7 @@ fun SociallyTopAppBar(
                 shape = MaterialTheme.shapes.small,
                 modifier = Modifier
                     .padding(start = dimensionResource(R.dimen.padding_l))
-                    .size(dimensionResource(R.dimen.socially_floating_button_size)),
+                    .size(dimensionResource(R.dimen.size_level_4)),
             )
         },
         colors = TopAppBarDefaults.topAppBarColors(

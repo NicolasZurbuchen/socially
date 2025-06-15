@@ -4,8 +4,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -80,10 +83,13 @@ fun LoginResetPasswordScreenContent(
             SociallyTopAppBar(
                 onNavigateUp = onNavigateUp,
             )
-        }
+        },
+        modifier = Modifier
+            .imePadding(),
     ) { paddingValues ->
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
                 .padding(horizontal = dimensionResource(R.dimen.padding_l)),
         ) {
@@ -114,7 +120,7 @@ fun LoginResetPasswordScreenContent(
                 ),
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_lh))
-                    .height(dimensionResource(R.dimen.socially_text_field_height)),
+                    .height(dimensionResource(R.dimen.size_level_9)),
             )
 
             SociallyButtonPrimary(
@@ -125,8 +131,11 @@ fun LoginResetPasswordScreenContent(
                 },
                 enabled = state.isSignInButtonEnabled,
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.padding_s))
-                    .height(dimensionResource(R.dimen.socially_button_height)),
+                    .padding(
+                        top = dimensionResource(R.dimen.padding_s),
+                        bottom = dimensionResource(R.dimen.padding_l),
+                    )
+                    .height(dimensionResource(R.dimen.size_level_7)),
             )
 
             if (state.isLoading) {
@@ -137,7 +146,7 @@ fun LoginResetPasswordScreenContent(
                 ) {
                     CircularProgressIndicator(
                         modifier = Modifier
-                            .padding(top = dimensionResource(R.dimen.padding_l)),
+                            .padding(vertical = dimensionResource(R.dimen.padding_l)),
                     )
                 }
             }

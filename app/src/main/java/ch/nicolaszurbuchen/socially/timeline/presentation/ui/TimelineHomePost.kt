@@ -21,7 +21,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
@@ -47,7 +46,7 @@ fun TimelineHomePost(
                 Box(
                     contentAlignment = Alignment.Center,
                     modifier = Modifier
-                        .size(40.dp)
+                        .size(dimensionResource(R.dimen.size_level_4))
                         .background(
                             color = MaterialTheme.colorScheme.primary,
                             shape = CircleShape,
@@ -105,7 +104,7 @@ fun TimelineHomePost(
                                 contentDescription = null,
                                 modifier = Modifier
                                     .padding(vertical = dimensionResource(R.dimen.padding_l))
-                                    .size(dimensionResource(R.dimen.socially_post_placeholder_image_height)),
+                                    .size(dimensionResource(R.dimen.size_level_7)),
                             )
                         }
                     },

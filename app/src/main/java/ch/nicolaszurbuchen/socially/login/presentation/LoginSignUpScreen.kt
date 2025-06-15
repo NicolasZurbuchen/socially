@@ -8,8 +8,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -78,10 +81,13 @@ fun LoginSignUpScreenContent(
             SociallyTopAppBar(
                 onNavigateUp = onNavigateUp,
             )
-        }
+        },
+        modifier = Modifier
+            .imePadding()
     ) { paddingValues ->
         Column(
             modifier = Modifier
+                .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
                 .padding(horizontal = dimensionResource(R.dimen.padding_l)),
         ) {
@@ -105,7 +111,7 @@ fun LoginSignUpScreenContent(
                 ),
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_lh))
-                    .height(dimensionResource(R.dimen.socially_text_field_height))
+                    .height(dimensionResource(R.dimen.size_level_9))
             )
 
             SociallyTextField(
@@ -121,7 +127,7 @@ fun LoginSignUpScreenContent(
                 ),
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_s))
-                    .height(dimensionResource(R.dimen.socially_text_field_height))
+                    .height(dimensionResource(R.dimen.size_level_9))
             )
 
             SociallyTextField(
@@ -140,7 +146,7 @@ fun LoginSignUpScreenContent(
                 onPasswordVisibilityToggle = onPasswordVisibilityToggle,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_s))
-                    .height(dimensionResource(R.dimen.socially_text_field_height))
+                    .height(dimensionResource(R.dimen.size_level_9))
             )
 
             SociallyButtonPrimary(
@@ -152,13 +158,16 @@ fun LoginSignUpScreenContent(
                 enabled = state.isSignUpButtonEnabled,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_s))
-                    .height(dimensionResource(R.dimen.socially_button_height))
+                    .height(dimensionResource(R.dimen.size_level_7))
             )
 
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.padding_m))
+                    .padding(
+                        top = dimensionResource(R.dimen.padding_m),
+                        bottom = dimensionResource(R.dimen.padding_l)
+                    )
                     .fillMaxWidth()
             ) {
                 Row(
@@ -193,7 +202,7 @@ fun LoginSignUpScreenContent(
                 ) {
                     CircularProgressIndicator(
                         modifier = Modifier
-                            .padding(top = dimensionResource(R.dimen.padding_l)),
+                            .padding(vertical = dimensionResource(R.dimen.padding_l)),
                     )
                 }
             }

@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
@@ -72,7 +71,7 @@ fun TimelineHomeScreenContent(
                         contentDescription = null,
                         modifier = Modifier
                             .padding(start = dimensionResource(R.dimen.padding_m))
-                            .size(30.dp),
+                            .size(dimensionResource(R.dimen.size_level_3)),
                     )
                 },
                 actions = {

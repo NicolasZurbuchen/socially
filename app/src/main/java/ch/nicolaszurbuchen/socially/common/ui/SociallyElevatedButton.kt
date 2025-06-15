@@ -15,7 +15,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
 
@@ -41,7 +40,7 @@ fun SociallyElevatedButton(
             hoveredElevation = dimensionResource(R.dimen.elevation_level_3),
             disabledElevation = dimensionResource(R.dimen.elevation_level_4)
         ),
-        contentPadding = PaddingValues(0.dp),
+        contentPadding = PaddingValues(dimensionResource(R.dimen.padding_none)),
         modifier = modifier
     ) {
         Icon(

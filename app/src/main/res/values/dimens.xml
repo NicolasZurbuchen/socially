@@ -20,10 +20,22 @@
     <dimen name="elevation_level_4">8dp</dimen>
     <dimen name="elevation_level_5">12dp</dimen>
 
-    <dimen name="socially_intro_welcome_button_size">70dp</dimen>
-    <dimen name="socially_floating_button_size">40dp</dimen>
-    <dimen name="socially_text_field_height">90dp</dimen>
-    <dimen name="socially_button_height">70dp</dimen>
-    <dimen name="socially_post_default_image_height">200dp</dimen>
-    <dimen name="socially_post_placeholder_image_height">60dp</dimen>
+    <dimen name="size_level_1">20dp</dimen>
+    <dimen name="size_level_2">20dp</dimen>
+    <dimen name="size_level_3">30dp</dimen>
+    <dimen name="size_level_4">40dp</dimen>
+    <dimen name="size_level_5">50dp</dimen>
+    <dimen name="size_level_6">60dp</dimen>
+    <dimen name="size_level_7">70dp</dimen>
+    <dimen name="size_level_8">80dp</dimen>
+    <dimen name="size_level_9">90dp</dimen>
+    <dimen name="size_level_10">100dp</dimen>
+    <dimen name="size_level_20">200dp</dimen>
+
+    <dimen name="size_level_7">70dp</dimen>
+    <dimen name="size_level_4">40dp</dimen>
+    <dimen name="size_level_9">90dp</dimen>
+    <dimen name="size_level_7">70dp</dimen>
+    <dimen name="size_level_20">200dp</dimen>
+    <dimen name="size_level_7">60dp</dimen>
 </resources>
