@@ -8,4 +8,8 @@ interface TimelineRepository {
 
     suspend fun createNewPost(title: String?, imageUri: Uri?): Result<Unit>
 
+    suspend fun getPosts(
+        pageSize: Int,
+        lastVisible: DocumentSnapshot?,
+    ): Result<TimelineHomeEntity>
 }

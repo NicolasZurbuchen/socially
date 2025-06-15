@@ -18,4 +18,16 @@ data class TimelineHomePostState(
 
     val hasImage: Boolean
         get() = imageUrl != null
+
+    companion object {
+        fun fromEntity(entity: TimelineHomePostEntity): TimelineHomePostState {
+            return TimelineHomePostState(
+                id = entity.id,
+                username = entity.username,
+                post = entity.post,
+                imageUrl = entity.imageUrl,
+                timestamp = entity.timestamp,
+            )
+        }
+    }
 }

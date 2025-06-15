@@ -14,6 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimelineHomeViewModel @Inject constructor(
+    private val timelineGetPostsUseCase: TimelineGetPostsUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(TimelineHomeState())
@@ -33,6 +34,30 @@ class TimelineHomeViewModel @Inject constructor(
     }
 
     fun loadNextPage() {
+        val state = _state.value
 
+        if (state.isLoadingMore || state.isRefreshing || !state.hasMore) return
+
+        _state.update { it.copy(isLoadingMore = true) }
+
+        viewModelScope.launch {
+            val result = timelineGetPostsUseCase(state.lastSnapshot)
+
+            _state.update {
+                if (result.isSuccess) {
+                    val page = result.getOrNull()!!
+                    it.copy(
+                        posts = it.posts + page.posts.map { TimelineHomePostState.fromEntity(it) },
+                        lastSnapshot = page.lastSnapshot,
+                        isLoadingMore = false,
+                        hasMore = page.hasMore,
+                    )
+                } else {
+                    it.copy(
+                        isLoadingMore = false,
+                    )
+                }
+            }
+        }
     }
 }

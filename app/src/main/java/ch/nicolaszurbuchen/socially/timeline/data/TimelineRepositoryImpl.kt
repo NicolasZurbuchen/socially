@@ -44,4 +44,51 @@ class TimelineRepositoryImpl(
             Result.failure(e)
         }
     }
+
+    override suspend fun getPosts(
+        pageSize: Int,
+        lastVisible: DocumentSnapshot?,
+    ): Result<TimelineHomeEntity> {
+        return try {
+            var query = firestore.collection("posts")
+                .orderBy("timestamp", Query.Direction.DESCENDING)
+                .limit(pageSize.toLong())
+
+            if (lastVisible != null) {
+                query = query.startAfter(lastVisible)
+            }
+
+            val postsSnapshot = query.get().await()
+
+            val postDocs = postsSnapshot.documents
+            val userIds = postDocs.mapNotNull { it.getString("userId") }.distinct()
+
+            val usersSnapshot = firestore.collection("users")
+                .whereIn(FieldPath.documentId(), userIds)
+                .get().await()
+
+            val usernamesById = usersSnapshot.documents.associate {
+                it.id to (it.getString("username") ?: "Unknown")
+            }
+
+            val posts = postDocs.mapNotNull { doc ->
+                val userId = doc.getString("userId") ?: return@mapNotNull null
+                val username = usernamesById[userId] ?: "Unknown"
+
+                TimelineHomePostEntity(
+                    id = doc.id,
+                    username = username,
+                    post = doc.getString("title"),
+                    imageUrl = doc.getString("imageUrl"),
+                    timestamp = doc.getLong("timestamp") ?: 0L,
+                )
+            }
+
+            val last = postsSnapshot.documents.lastOrNull()
+            Result.success(TimelineHomeEntity(posts, last, true))
+
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

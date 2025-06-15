@@ -34,4 +34,12 @@ object TimelineModule {
     ): TimelineCreateNewPostUseCase {
         return TimelineCreateNewPostUseCase(repository)
     }
+
+    @Provides
+    @Singleton
+    fun provideTimelineGetPostsUseCase(
+        repository: TimelineRepository,
+    ): TimelineGetPostsUseCase {
+        return TimelineGetPostsUseCase(repository)
+    }
 }
