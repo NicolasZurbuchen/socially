@@ -41,7 +41,7 @@ fun LoginResetPasswordScreen(
 
     val navigateToSignIn = {
         navController.navigate(Screen.LoginSignInScreen.route) {
-            popUpTo(Screen.LoginResetPassword.route) { inclusive = true }
+            popUpTo(0) { inclusive = true }
         }
     }
 

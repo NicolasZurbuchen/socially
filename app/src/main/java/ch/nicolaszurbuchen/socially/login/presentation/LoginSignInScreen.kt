@@ -43,7 +43,9 @@ fun LoginSignInScreen(
     val state by viewModel.state.collectAsState()
 
     if (state.success) {
-        navController.navigate(Screen.TimelineHomeScreen.route)
+        navController.navigate(Screen.TimelineHomeScreen.route) {
+            popUpTo(0) { inclusive = true }
+        }
     }
 
     LoginSignInScreenContent(
@@ -52,11 +54,11 @@ fun LoginSignInScreen(
         onEmailValueChange = viewModel::updateEmail,
         onPasswordValueChange = viewModel::updatePassword,
         onPasswordVisibilityToggle = viewModel::togglePasswordVisibility,
-        onForgetPasswordClick = { navController.navigate(Screen.LoginResetPassword.route) },
+        onForgetPasswordClick = { navController.navigate(Screen.LoginResetPasswordScreen.route) },
         onSignInClick = viewModel::signIn,
         onCreateAccountClick = {
             navController.navigate(Screen.LoginSignUpScreen.route) {
-                popUpTo(Screen.LoginSignInScreen.route) { inclusive = true }
+                popUpTo(Screen.LoginSignUpScreen.route) { inclusive = true }
             }
         },
     )

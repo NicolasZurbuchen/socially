@@ -43,7 +43,9 @@ fun LoginSignUpScreen(
     val state by viewModel.state.collectAsState()
 
     if (state.success) {
-        navController.navigate(Screen.TimelineHomeScreen.route)
+        navController.navigate(Screen.TimelineHomeScreen.route) {
+            popUpTo(0) { inclusive = true }
+        }
     }
 
     LoginSignUpScreenContent(
