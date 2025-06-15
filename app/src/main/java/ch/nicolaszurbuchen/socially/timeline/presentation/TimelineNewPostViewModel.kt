@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TimelineNewPostViewModel @Inject constructor(
-
+    private val createNewPostUseCase: TimelineCreateNewPostUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(TimelineNewPostState())
@@ -35,7 +35,7 @@ class TimelineNewPostViewModel @Inject constructor(
 
     fun post() {
         viewModelScope.launch {
-
+            createNewPostUseCase(_state.value.post, _state.value.imageUri)
         }
     }
 }

@@ -59,6 +59,7 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.storage.ktx)
     implementation(libs.compose.icons)
     kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
