@@ -29,6 +29,7 @@ import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
 import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
 import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
+import ch.nicolaszurbuchen.socially.common.ui.SociallyTopAppBar
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginResetPasswordState
 
 @Composable
@@ -46,6 +47,7 @@ fun LoginResetPasswordScreen(
 
     LoginResetPasswordScreenContent(
         state = state,
+        onNavigateUp = { navController.navigateUp() },
         onEmailValueChange = viewModel::updateEmail,
         onSendClick = viewModel::sendEmail,
     )
@@ -67,12 +69,19 @@ fun LoginResetPasswordScreen(
 @Composable
 fun LoginResetPasswordScreenContent(
     state: LoginResetPasswordState,
+    onNavigateUp: () -> Unit,
     onEmailValueChange: (String) -> Unit,
     onSendClick: () -> Unit,
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        topBar = {
+            SociallyTopAppBar(
+                onNavigateUp = onNavigateUp,
+            )
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)

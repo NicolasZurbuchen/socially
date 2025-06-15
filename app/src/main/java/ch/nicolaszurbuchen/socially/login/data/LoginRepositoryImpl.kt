@@ -2,7 +2,6 @@ package ch.nicolaszurbuchen.socially.login.data
 
 import ch.nicolaszurbuchen.socially.login.domain.LoginRepository
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 

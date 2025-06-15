@@ -32,6 +32,7 @@ import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
 import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
 import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
+import ch.nicolaszurbuchen.socially.common.ui.SociallyTopAppBar
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 
 @Composable
@@ -47,6 +48,7 @@ fun LoginSignUpScreen(
 
     LoginSignUpScreenContent(
         state = state,
+        onNavigateUp = { navController.navigateUp() },
         onUsernameValueChange = viewModel::updateUsername,
         onEmailValueChange = viewModel::updateEmail,
         onPasswordValueChange = viewModel::updatePassword,
@@ -59,6 +61,7 @@ fun LoginSignUpScreen(
 @Composable
 fun LoginSignUpScreenContent(
     state: LoginSignUpState,
+    onNavigateUp: () -> Unit,
     onUsernameValueChange: (String) -> Unit,
     onEmailValueChange: (String) -> Unit,
     onPasswordValueChange: (String) -> Unit,
@@ -68,7 +71,13 @@ fun LoginSignUpScreenContent(
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    Scaffold { paddingValues ->
+    Scaffold(
+        topBar = {
+            SociallyTopAppBar(
+                onNavigateUp = onNavigateUp,
+            )
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)

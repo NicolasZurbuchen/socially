@@ -2,7 +2,6 @@ package ch.nicolaszurbuchen.socially.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.login.domain.LoginRepository
 import ch.nicolaszurbuchen.socially.login.domain.LoginSignInUseCase
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignInState
 import dagger.hilt.android.lifecycle.HiltViewModel
