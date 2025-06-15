@@ -1,12 +1,147 @@
 package ch.nicolaszurbuchen.socially.timeline.presentation
 
-import androidx.compose.material3.Text
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ch.nicolaszurbuchen.socially.R
+import ch.nicolaszurbuchen.socially.Screen
+import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomeState
+import ch.nicolaszurbuchen.socially.timeline.presentation.ui.TimelineHomePost
 
 @Composable
 fun TimelineHomeScreen(
     navController: NavController,
+    viewModel: TimelineHomeViewModel = hiltViewModel(),
 ) {
-    Text("TimeLineHomeScreen")
+    val state by viewModel.state.collectAsState()
+
+    TimelineHomeScreenContent(
+        state = state,
+        onLogout = viewModel::logout,
+        onRefresh = viewModel::refresh,
+        onLoadNextPage = viewModel::loadNextPage,
+        onCreateNewPost = { navController.navigate(Screen.TimelineNewPostScreen.route) }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TimelineHomeScreenContent(
+    state: TimelineHomeState,
+    onLogout: () -> Unit,
+    onRefresh: () -> Unit,
+    onLoadNextPage: () -> Unit,
+    onCreateNewPost: () -> Unit,
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Image(
+                        painter = painterResource(R.drawable.img_socially_logo),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = dimensionResource(R.dimen.padding_m))
+                            .size(30.dp),
+                    )
+                },
+                actions = {
+                    IconButton(
+                        onClick = onLogout,
+                    ) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.Logout,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(end = dimensionResource(R.dimen.padding_m))
+                        )
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors().copy(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
+            )
+        }
+    ) { paddingValues ->
+        PullToRefreshBox(
+            isRefreshing = state.isLoadingMore,
+            onRefresh = onRefresh,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+        ) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_m)),
+                contentPadding = PaddingValues(dimensionResource(R.dimen.padding_m)),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(horizontal = dimensionResource(R.dimen.padding_m))
+            ) {
+                itemsIndexed(state.posts) { index, post ->
+                    TimelineHomePost(
+                        state = post,
+                    )
+
+                    if (index == state.posts.lastIndex - 2 && !state.isLoadingMore && state.hasMore) {
+                        onLoadNextPage()
+                    }
+                }
+
+                if (state.isLoadingMore) {
+                    item {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                        ) {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .padding(dimensionResource(R.dimen.padding_l))
+                            )
+                        }
+                    }
+                }
+            }
+            FloatingActionButton(
+                onClick = onCreateNewPost,
+                modifier = Modifier
+                    .align(Alignment.BottomEnd),
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                )
+            }
+        }
+    }
 }
