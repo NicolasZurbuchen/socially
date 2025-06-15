@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import ch.nicolaszurbuchen.socially.R
-import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
+import ch.nicolaszurbuchen.socially.common.theme.SociallyTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

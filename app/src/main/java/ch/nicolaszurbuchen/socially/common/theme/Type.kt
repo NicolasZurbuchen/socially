@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.ui.theme
+package ch.nicolaszurbuchen.socially.common.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

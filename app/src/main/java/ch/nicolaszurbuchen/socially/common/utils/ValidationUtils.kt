@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.utils
+package ch.nicolaszurbuchen.socially.common.utils
 
 fun isEmailValid(email: String): Boolean {
     return (email.matches(Regex("^[\\w-_.+]*[\\w-_.]@[\\w]+([.][\\w]+)+$")))

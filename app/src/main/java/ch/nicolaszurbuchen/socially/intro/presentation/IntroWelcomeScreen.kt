@@ -22,7 +22,7 @@ import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
 import ch.nicolaszurbuchen.socially.common.components.ui.SociallyElevatedButton
-import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
+import ch.nicolaszurbuchen.socially.common.theme.SociallyTheme
 
 @Composable
 fun IntroWelcomeScreen(

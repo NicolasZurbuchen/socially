@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import ch.nicolaszurbuchen.socially.R
-import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
+import ch.nicolaszurbuchen.socially.common.theme.SociallyTheme
 
 @Composable
 fun SociallyElevatedButton(

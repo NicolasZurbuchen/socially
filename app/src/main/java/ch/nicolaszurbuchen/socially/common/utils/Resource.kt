@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.utils
+package ch.nicolaszurbuchen.socially.common.utils
 
 sealed class Resource<out T> {
     data class Success<out T>(val data: T): Resource<T>()

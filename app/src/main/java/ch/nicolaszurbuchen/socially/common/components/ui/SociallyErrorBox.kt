@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
-import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
+import ch.nicolaszurbuchen.socially.common.theme.SociallyTheme
 
 @Composable
 fun SociallyErrorBox(

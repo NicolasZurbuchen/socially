@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.ui.theme
+package ch.nicolaszurbuchen.socially.common.theme
 
 import androidx.compose.ui.graphics.Color
 

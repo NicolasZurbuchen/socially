@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.utils
+package ch.nicolaszurbuchen.socially.common.utils
 
 import java.text.DateFormat
 import java.util.Date

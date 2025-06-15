@@ -1,8 +1,8 @@
 package ch.nicolaszurbuchen.socially.common.auth.domain
 
-import ch.nicolaszurbuchen.socially.utils.DomainError
-import ch.nicolaszurbuchen.socially.utils.Resource
-import ch.nicolaszurbuchen.socially.utils.isEmailValid
+import ch.nicolaszurbuchen.socially.common.utils.DomainError
+import ch.nicolaszurbuchen.socially.common.utils.Resource
+import ch.nicolaszurbuchen.socially.common.utils.isEmailValid
 
 class AuthResetPasswordUseCase(
     private val repository: AuthRepository,

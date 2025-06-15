@@ -1,8 +1,8 @@
 package ch.nicolaszurbuchen.socially.common.auth.domain
 
-import ch.nicolaszurbuchen.socially.utils.Resource
-import ch.nicolaszurbuchen.socially.utils.ValidationErrors
-import ch.nicolaszurbuchen.socially.utils.validate
+import ch.nicolaszurbuchen.socially.common.utils.Resource
+import ch.nicolaszurbuchen.socially.common.utils.ValidationErrors
+import ch.nicolaszurbuchen.socially.common.utils.validate
 
 class AuthSignUpUseCase(
     private val repository: AuthRepository,

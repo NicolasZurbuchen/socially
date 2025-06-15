@@ -1,6 +1,6 @@
 package ch.nicolaszurbuchen.socially.common.auth.domain
 
-import ch.nicolaszurbuchen.socially.utils.Resource
+import ch.nicolaszurbuchen.socially.common.utils.Resource
 
 interface AuthRepository {
 

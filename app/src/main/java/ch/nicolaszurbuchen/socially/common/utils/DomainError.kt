@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.utils
+package ch.nicolaszurbuchen.socially.common.utils
 
 sealed class DomainError {
     data object InvalidUsername : DomainError()
