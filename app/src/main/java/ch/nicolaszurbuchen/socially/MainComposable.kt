@@ -63,14 +63,6 @@ fun MainComposable(
                         navController = navController,
                     )
                 }
-
-                // TODO remember login
-                // TODO event pour naviguer
-                // TODO automatic focus
-                // TODO field validation
-                // TODO error management
-                // TODO tests
-                // TODO lock orientation
             }
         }
     }

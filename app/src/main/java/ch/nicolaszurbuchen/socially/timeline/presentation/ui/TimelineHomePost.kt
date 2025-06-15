@@ -11,12 +11,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -25,14 +27,18 @@ import androidx.compose.ui.unit.sp
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
 import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
+import ch.nicolaszurbuchen.socially.utils.toReadableDate
 import coil.compose.SubcomposeAsyncImage
 
 @Composable
 fun TimelineHomePost(
     state: TimelineHomePostState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Card(
+        colors = CardDefaults.cardColors().copy(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
         modifier = modifier
             .fillMaxWidth(),
     ) {
@@ -54,6 +60,7 @@ fun TimelineHomePost(
                 ) {
                     Text(
                         text = state.usernameLetter.toString(),
+                        color = Color.White,
                         fontSize = 30.sp,
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -67,7 +74,7 @@ fun TimelineHomePost(
                         style = MaterialTheme.typography.titleMedium,
                     )
                     Text(
-                        text = state.timestamp.toString(),
+                        text = state.timestamp.toReadableDate(),
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier
                             .padding(top = dimensionResource(R.dimen.padding_xs)),
