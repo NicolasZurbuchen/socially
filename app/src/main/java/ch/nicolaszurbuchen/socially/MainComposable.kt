@@ -14,6 +14,7 @@ import ch.nicolaszurbuchen.socially.login.presentation.LoginResetPasswordScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignInScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignUpScreen
 import ch.nicolaszurbuchen.socially.timeline.presentation.TimelineHomeScreen
+import ch.nicolaszurbuchen.socially.timeline.presentation.TimelineNewPostScreen
 
 @Composable
 fun MainComposable(
@@ -42,13 +43,18 @@ fun MainComposable(
                     navController = navController,
                 )
             }
-            composable(Screen.LoginResetPassword.route) {
+            composable(Screen.LoginResetPasswordScreen.route) {
                 LoginResetPasswordScreen(
                     navController = navController,
                 )
             }
             composable(Screen.TimelineHomeScreen.route) {
                 TimelineHomeScreen(
+                    navController = navController,
+                )
+            }
+            composable(Screen.TimelineNewPostScreen.route) {
+                TimelineNewPostScreen(
                     navController = navController,
                 )
             }
@@ -60,6 +66,7 @@ sealed class Screen(val route: String) {
     data object IntroWelcomeScreen : Screen("intro_welcome")
     data object LoginSignInScreen : Screen("login_sign_in")
     data object LoginSignUpScreen : Screen("login_sign_up")
-    data object LoginResetPassword : Screen("login_password_reset")
+    data object LoginResetPasswordScreen : Screen("login_password_reset")
     data object TimelineHomeScreen : Screen("timeline_home")
+    data object TimelineNewPostScreen : Screen("timeline_new_post")
 }

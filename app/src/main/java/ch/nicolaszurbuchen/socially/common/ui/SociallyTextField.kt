@@ -33,8 +33,9 @@ fun SociallyTextField(
     value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
-    leadingIcon: Painter,
     modifier: Modifier = Modifier,
+    leadingIcon: Painter? = null,
+    maxLines: Int = 1,
     supportingText: String? = null,
     isError: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -52,9 +53,16 @@ fun SociallyTextField(
         value = value,
         onValueChange = onValueChange,
         placeholder = { Text(placeholder) },
-        leadingIcon = { Image(leadingIcon, null) },
-        trailingIcon = {
-            if (isPassword) {
+        leadingIcon = leadingIcon?.let {
+            {
+                Image(
+                    painter = leadingIcon,
+                    contentDescription = null,
+                )
+            }
+        },
+        trailingIcon = if (isPassword) {
+            {
                 IconButton(
                     onClick = onPasswordVisibilityToggle,
                 ) {
@@ -64,13 +72,14 @@ fun SociallyTextField(
                     )
                 }
             }
-        },
+        } else null,
         supportingText = { supportingText?.let { Text(it) } },
         isError = isError,
         keyboardOptions = keyboardOptions,
         keyboardActions = keyboardActions,
         visualTransformation = visualTransformation,
-        singleLine = true,
+        maxLines = maxLines,
+        singleLine = maxLines == 1,
         shape = MaterialTheme.shapes.small,
         colors = OutlinedTextFieldDefaults.colors().copy(
             unfocusedIndicatorColor = Color.Transparent,
