@@ -35,7 +35,7 @@ class TimelineNewPostViewModel @Inject constructor(
 
     fun post() {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update { it.copy(isLoading = true, hasError = false) }
 
             val result = createNewPostUseCase(_state.value.post, _state.value.imageUri)
 
@@ -43,7 +43,7 @@ class TimelineNewPostViewModel @Inject constructor(
                 if (result.isSuccess) {
                     it.copy(isLoading = false, success = true)
                 } else {
-                    it.copy(isLoading = false)
+                    it.copy(isLoading = false, hasError = true)
                 }
             }
 

@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.common.ui
+package ch.nicolaszurbuchen.socially.common.components.ui
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape

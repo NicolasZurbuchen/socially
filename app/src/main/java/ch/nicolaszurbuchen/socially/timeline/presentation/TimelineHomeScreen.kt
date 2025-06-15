@@ -31,10 +31,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
+import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyErrorBox
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomeState
 import ch.nicolaszurbuchen.socially.timeline.presentation.ui.TimelineHomePost
 
@@ -117,6 +120,17 @@ fun TimelineHomeScreenContent(
                     .fillMaxSize()
                     .padding(horizontal = dimensionResource(R.dimen.padding_m))
             ) {
+                if (state.hasError) {
+                    item {
+                        SociallyErrorBox(
+                            error = SociallyErrorState(
+                                R.string.error_something_wrong,
+                                R.string.timeline_new_post_cannot_load,
+                            )
+                        )
+                    }
+                }
+
                 itemsIndexed(state.posts) { index, post ->
                     TimelineHomePost(
                         state = post,

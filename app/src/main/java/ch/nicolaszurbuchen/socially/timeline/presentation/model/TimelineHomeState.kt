@@ -8,4 +8,5 @@ data class TimelineHomeState(
     val isRefreshing: Boolean = true,
     val hasMore: Boolean = true,
     val lastSnapshot: DocumentSnapshot? = null,
+    val hasError: Boolean = false,
 )

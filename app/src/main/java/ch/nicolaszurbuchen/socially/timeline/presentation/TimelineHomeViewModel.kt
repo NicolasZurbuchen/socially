@@ -76,7 +76,7 @@ class TimelineHomeViewModel @Inject constructor(
         if (state.isLoadingMore || state.isRefreshing || !state.hasMore) return
 
         pagingJob?.cancel()
-        _state.update { it.copy(isLoadingMore = true) }
+        _state.update { it.copy(isLoadingMore = true, hasError = false) }
 
         pagingJob = viewModelScope.launch {
             val result = timelineGetPostsUseCase(state.lastSnapshot)
@@ -94,7 +94,8 @@ class TimelineHomeViewModel @Inject constructor(
                 } else {
                     it.copy(
                         isLoadingMore = false,
-                        isRefreshing = false
+                        isRefreshing = false,
+                        hasError = true,
                     )
                 }
             }

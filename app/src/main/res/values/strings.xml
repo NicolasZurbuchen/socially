@@ -3,6 +3,12 @@
 
     <string name="common_ok">OK</string>
 
+    <string name="error_something_wrong">Something went wrong</string>
+    <string name="error_something_wrong_description">Check your connection and try again.</string>
+    <string name="error_invalid_email">Invalid email</string>
+    <string name="error_invalid_username">Username needs to be at least 3 characters.</string>
+    <string name="error_invalid_password">Password needs to be at least 8 characters.</string>
+
     <string name="intro_welcome_title">Welcome</string>
     <string name="intro_welcome_subtitle">Where every post brings you closer to your community.</string>
 
@@ -30,4 +36,6 @@
     <string name="timeline_new_post_post">Post</string>
     <string name="timeline_new_post_success_title">Post Successful</string>
     <string name="timeline_new_post_success_message">Your post has been shared successfully.</string>
+    <string name="timeline_new_post_cannot_load">Your timeline could not be load. Check your connection and try again.</string>
+    <string name="timeline_new_post_cannot_post">Your post didn’t go through. Check your connection and try again.</string>
 </resources>

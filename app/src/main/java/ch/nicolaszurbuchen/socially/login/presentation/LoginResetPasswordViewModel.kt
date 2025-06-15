@@ -2,7 +2,11 @@ package ch.nicolaszurbuchen.socially.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ch.nicolaszurbuchen.socially.R
+import ch.nicolaszurbuchen.socially.utils.DomainError
+import ch.nicolaszurbuchen.socially.utils.Resource
 import ch.nicolaszurbuchen.socially.common.auth.domain.AuthResetPasswordUseCase
+import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginResetPasswordState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginResetPasswordViewModel @Inject constructor(
     private val resetPasswordUseCase: AuthResetPasswordUseCase,
-): ViewModel() {
+) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginResetPasswordState())
     val state: StateFlow<LoginResetPasswordState>
@@ -28,15 +32,34 @@ class LoginResetPasswordViewModel @Inject constructor(
         val state = _state.value
 
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true) }
+            _state.update { it.copy(emailError = null, isLoading = true, error = null) }
 
-            val result = resetPasswordUseCase(state.email)
+            when (val result = resetPasswordUseCase(state.email)) {
+                is Resource.Success -> {
+                    _state.update { it.copy(isLoading = false, success = true) }
+                }
 
-            _state.update {
-                if (result.isSuccess) {
-                    it.copy(isLoading = false, success = true)
-                } else {
-                    it.copy(isLoading = false)
+                is Resource.Failure -> {
+                    when (result.error) {
+                        DomainError.InvalidEmail -> _state.update {
+                            it.copy(
+                                emailError = R.string.error_invalid_email,
+                                isLoading = false,
+                            )
+                        }
+
+                        is DomainError.Firebase -> _state.update {
+                            it.copy(
+                                isLoading = false,
+                                error = SociallyErrorState(
+                                    title = R.string.error_something_wrong,
+                                    description = R.string.error_something_wrong_description,
+                                )
+                            )
+                        }
+
+                        else -> {}
+                    }
                 }
             }
         }

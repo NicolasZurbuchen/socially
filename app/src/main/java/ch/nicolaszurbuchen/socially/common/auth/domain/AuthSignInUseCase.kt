@@ -1,9 +1,19 @@
 package ch.nicolaszurbuchen.socially.common.auth.domain
 
+import ch.nicolaszurbuchen.socially.utils.Resource
+import ch.nicolaszurbuchen.socially.utils.ValidationErrors
+import ch.nicolaszurbuchen.socially.utils.validate
+
 class AuthSignInUseCase(
     private val repository: AuthRepository,
 ) {
-    suspend operator fun invoke(email: String, password: String): Result<Unit> {
+    suspend operator fun invoke(email: String, password: String): Resource<Unit> {
+        val validationErrors = validate(email, password)
+
+        if (validationErrors.isNotEmpty()) {
+            return Resource.Failure(ValidationErrors(validationErrors))
+        }
+
         return repository.signIn(email, password)
     }
 }

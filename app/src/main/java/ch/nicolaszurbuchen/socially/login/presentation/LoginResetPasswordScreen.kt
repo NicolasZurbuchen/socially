@@ -30,9 +30,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
-import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
-import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
-import ch.nicolaszurbuchen.socially.common.ui.SociallyTopAppBar
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyButtonPrimary
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyErrorBox
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyTextField
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyTopAppBar
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginResetPasswordState
 
 @Composable
@@ -93,8 +94,16 @@ fun LoginResetPasswordScreenContent(
                 .padding(paddingValues)
                 .padding(horizontal = dimensionResource(R.dimen.padding_l)),
         ) {
+            state.error?.let {
+                SociallyErrorBox(
+                    error = it,
+                    modifier = Modifier
+                        .padding(top = dimensionResource(R.dimen.padding_m)),
+                )
+            }
+
             Text(
-                text = stringResource(R.string.login_sign_in_title),
+                text = stringResource(R.string.login_password_reset_title),
                 style = MaterialTheme.typography.displaySmall,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_xl)),
@@ -112,7 +121,7 @@ fun LoginResetPasswordScreenContent(
                 onValueChange = onEmailValueChange,
                 placeholder = stringResource(R.string.login_email),
                 leadingIcon = painterResource(state.emailIcon),
-                supportingText = state.emailError,
+                supportingText = state.emailError?.let { stringResource(it) },
                 isError = state.isEmailError,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,

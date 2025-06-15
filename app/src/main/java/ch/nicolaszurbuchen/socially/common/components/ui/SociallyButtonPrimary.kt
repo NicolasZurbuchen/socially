@@ -1,8 +1,7 @@
-package ch.nicolaszurbuchen.socially.common.ui
+package ch.nicolaszurbuchen.socially.common.components.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -11,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
 
 @Composable
-fun SociallyButtonSecondary(
+fun SociallyButtonPrimary(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -20,11 +19,7 @@ fun SociallyButtonSecondary(
     Button(
         onClick = onClick,
         enabled = enabled,
-        shape = MaterialTheme.shapes.extraSmall,
-        colors = ButtonDefaults.buttonColors().copy(
-            containerColor = MaterialTheme.colorScheme.secondary,
-            contentColor = MaterialTheme.colorScheme.onSecondary,
-        ),
+        shape = MaterialTheme.shapes.small,
         modifier = modifier
             .fillMaxWidth(),
     ) {
@@ -36,9 +31,9 @@ fun SociallyButtonSecondary(
 
 @Preview
 @Composable
-private fun SociallyButtonSecondaryPreview() {
+private fun SociallyButtonPrimaryPreview() {
     SociallyTheme {
-        SociallyButtonSecondary(
+        SociallyButtonPrimary(
             text = "Sign In",
             onClick = {},
         )

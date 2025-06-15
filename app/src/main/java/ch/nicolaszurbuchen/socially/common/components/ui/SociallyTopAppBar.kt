@@ -1,4 +1,4 @@
-package ch.nicolaszurbuchen.socially.common.ui
+package ch.nicolaszurbuchen.socially.common.components.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size

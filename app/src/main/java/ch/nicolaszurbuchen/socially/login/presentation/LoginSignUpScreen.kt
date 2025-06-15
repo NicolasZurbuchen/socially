@@ -18,6 +18,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -33,9 +34,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
-import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
-import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
-import ch.nicolaszurbuchen.socially.common.ui.SociallyTopAppBar
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyButtonPrimary
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyErrorBox
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyTextField
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyTopAppBar
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 
 @Composable
@@ -45,9 +47,13 @@ fun LoginSignUpScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    if (state.success) {
-        navController.navigate(Screen.TimelineHomeScreen.route) {
-            popUpTo(0) { inclusive = true }
+    val eventFlow = viewModel.eventFlow
+
+    LaunchedEffect(true) {
+        eventFlow.collect {
+            navController.navigate(Screen.TimelineHomeScreen.route) {
+                popUpTo(0) { inclusive = true }
+            }
         }
     }
 
@@ -91,6 +97,14 @@ fun LoginSignUpScreenContent(
                 .padding(paddingValues)
                 .padding(horizontal = dimensionResource(R.dimen.padding_l)),
         ) {
+            state.error?.let {
+                SociallyErrorBox(
+                    error = it,
+                    modifier = Modifier
+                        .padding(top = dimensionResource(R.dimen.padding_m)),
+                )
+            }
+
             Text(
                 text = stringResource(R.string.login_sign_up_title),
                 style = MaterialTheme.typography.displaySmall,
@@ -103,7 +117,7 @@ fun LoginSignUpScreenContent(
                 onValueChange = onUsernameValueChange,
                 placeholder = stringResource(R.string.login_username),
                 leadingIcon = painterResource(state.usernameIcon),
-                supportingText = state.usernameError,
+                supportingText = state.usernameError?.let { stringResource(it) },
                 isError = state.isUsernameError,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Text,
@@ -119,7 +133,7 @@ fun LoginSignUpScreenContent(
                 onValueChange = onEmailValueChange,
                 placeholder = stringResource(R.string.login_email),
                 leadingIcon = painterResource(state.emailIcon),
-                supportingText = state.emailError,
+                supportingText = state.emailError?.let { stringResource(it) },
                 isError = state.isEmailError,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Email,
@@ -135,7 +149,7 @@ fun LoginSignUpScreenContent(
                 onValueChange = onPasswordValueChange,
                 placeholder = stringResource(R.string.login_password),
                 leadingIcon = painterResource(state.passwordIcon),
-                supportingText = state.passwordError,
+                supportingText = state.passwordError?.let { stringResource(it) },
                 isError = state.isPasswordError,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Password,

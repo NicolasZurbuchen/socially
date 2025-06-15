@@ -7,6 +7,7 @@ data class TimelineNewPostState(
     val imageUri: Uri? = null,
     val isLoading: Boolean = false,
     val success: Boolean = false,
+    val hasError: Boolean = false,
 ) {
 
     val isImageUploaded: Boolean

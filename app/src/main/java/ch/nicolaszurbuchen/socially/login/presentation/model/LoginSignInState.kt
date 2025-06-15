@@ -1,16 +1,18 @@
 package ch.nicolaszurbuchen.socially.login.presentation.model
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import ch.nicolaszurbuchen.socially.R
+import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
 
 data class LoginSignInState(
     val email: String = "",
-    val emailError: String? = null,
+    @StringRes val emailError: Int? = null,
     val password: String = "",
-    val passwordError: String? = null,
+    @StringRes val passwordError: Int? = null,
     val passwordVisible: Boolean = false,
     val isLoading: Boolean = false,
-    val success: Boolean = false,
+    val error: SociallyErrorState? = null,
 ) {
 
     val emailIcon: Int
@@ -18,14 +20,14 @@ data class LoginSignInState(
         get() = if (email.isEmpty()) R.drawable.ic_email_off else R.drawable.ic_email_on
 
     val isEmailError: Boolean
-        get() = !emailError.isNullOrEmpty()
+        get() = emailError != null
 
     val passwordIcon: Int
         @DrawableRes
         get() = if (password.isEmpty()) R.drawable.ic_lock_off else R.drawable.ic_lock_on
 
     val isPasswordError: Boolean
-        get() = !passwordError.isNullOrEmpty()
+        get() = passwordError != null
 
     val isSignInButtonEnabled: Boolean
         get() = email.isNotEmpty() && password.isNotEmpty() && !isLoading

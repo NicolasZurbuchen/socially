@@ -55,9 +55,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.Screen
-import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
-import ch.nicolaszurbuchen.socially.common.ui.SociallyElevatedButton
-import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
+import ch.nicolaszurbuchen.socially.common.components.model.SociallyErrorState
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyButtonPrimary
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyElevatedButton
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyErrorBox
+import ch.nicolaszurbuchen.socially.common.components.ui.SociallyTextField
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineNewPostState
 import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.launch
@@ -170,6 +172,17 @@ fun TimelineNewPostContent(
                 .padding(paddingValues)
                 .padding(dimensionResource(R.dimen.padding_l))
         ) {
+            if (state.hasError) {
+                SociallyErrorBox(
+                    error = SociallyErrorState(
+                        title = R.string.error_something_wrong,
+                        description = R.string.timeline_new_post_cannot_post,
+                    ),
+                    modifier = Modifier
+                        .padding(bottom = dimensionResource(R.dimen.padding_l))
+                )
+            }
+
             Column(
                 modifier = Modifier
                     .background(
