@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ch.nicolaszurbuchen.socially.intro.presentation.IntroWelcomeScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginResetPasswordScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignInScreen
 import ch.nicolaszurbuchen.socially.login.presentation.LoginSignUpScreen
@@ -24,8 +25,13 @@ fun MainComposable(
     ) {
         NavHost(
             navController = navController,
-            startDestination = Screen.LoginSignUpScreen.route,
+            startDestination = Screen.IntroWelcomeScreen.route,
         ) {
+            composable(Screen.IntroWelcomeScreen.route) {
+                IntroWelcomeScreen(
+                    navController = navController,
+                )
+            }
             composable(Screen.LoginSignUpScreen.route) {
                 LoginSignUpScreen(
                     navController = navController,
@@ -51,6 +57,7 @@ fun MainComposable(
 }
 
 sealed class Screen(val route: String) {
+    data object IntroWelcomeScreen : Screen("intro_welcome")
     data object LoginSignInScreen : Screen("login_sign_in")
     data object LoginSignUpScreen : Screen("login_sign_up")
     data object LoginResetPassword : Screen("login_password_reset")

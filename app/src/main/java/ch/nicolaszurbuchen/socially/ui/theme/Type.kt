@@ -7,6 +7,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 val Typography = Typography(
+    displayLarge = TextStyle( // Hero headlines / splash screens
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Medium,
+        fontSize = 44.sp,
+    ),
     displaySmall = TextStyle( // Prominent headings
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.SemiBold,

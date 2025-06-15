@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Socially</string>
 
+    <string name="intro_welcome_title">Welcome</string>
+    <string name="intro_welcome_subtitle">Where every post brings you closer to your community.</string>
+
     <string name="login_sign_in_title">Sign In</string>
     <string name="login_username">Username</string>
     <string name="login_email">Email</string>
