@@ -24,6 +24,7 @@ fun SociallyElevatedButton(
     icon: ImageVector,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     shape: Shape = FloatingActionButtonDefaults.shape,
 ) {
     ElevatedButton (

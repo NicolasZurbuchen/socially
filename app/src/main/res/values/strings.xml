@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Socially</string>
 
+    <string name="common_ok">OK</string>
+
     <string name="intro_welcome_title">Welcome</string>
     <string name="intro_welcome_subtitle">Where every post brings you closer to your community.</string>
 
@@ -20,11 +22,12 @@
     <string name="login_password_reset_description">Enter the email address associated with your account. We\'ll send you a link to reset your password.</string>
     <string name="login_password_reset_confirmation_title">Reset Email Sent</string>
     <string name="login_password_reset_confirmation">A password reset link has been sent to your email. Please check your inbox (and spam folder) to continue.</string>
-    <string name="login_password_reset_ok">OK</string>
 
     <string name="timeline_new_post_title">New Post</string>
     <string name="timeline_new_post_header">What\'s on your mind?</string>
     <string name="timeline_new_post_type_here">Type here…</string>
     <string name="timeline_new_post_upload_image">Upload your image</string>
     <string name="timeline_new_post_post">Post</string>
+    <string name="timeline_new_post_success_title">Post Successful</string>
+    <string name="timeline_new_post_success_message">Your post has been shared successfully.</string>
 </resources>

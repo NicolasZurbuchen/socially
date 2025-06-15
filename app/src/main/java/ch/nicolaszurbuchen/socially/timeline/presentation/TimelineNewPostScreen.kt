@@ -26,12 +26,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -47,27 +50,31 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import ch.nicolaszurbuchen.socially.R
+import ch.nicolaszurbuchen.socially.Screen
 import ch.nicolaszurbuchen.socially.common.ui.SociallyButtonPrimary
 import ch.nicolaszurbuchen.socially.common.ui.SociallyElevatedButton
 import ch.nicolaszurbuchen.socially.common.ui.SociallyTextField
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineNewPostState
-import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
 import coil.compose.rememberAsyncImagePainter
 import kotlinx.coroutines.launch
 
 @Composable
 fun TimelineNewPostScreen(
     navController: NavController,
-    viewModel: TimelineNewPostViewModel = hiltViewModel()
+    viewModel: TimelineNewPostViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     val state by viewModel.state.collectAsState()
+
+    val navigateToHome = {
+        navController.navigate(Screen.TimelineHomeScreen.route) {
+            popUpTo(0) { inclusive = true }
+        }
+    }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
@@ -87,12 +94,29 @@ fun TimelineNewPostScreen(
             launcher.launch("image/*")
         } else {
             val permission = Manifest.permission.READ_EXTERNAL_STORAGE
-            if (ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(
+                    context,
+                    permission
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
                 launcher.launch("image/*")
             } else {
                 permissionLauncher.launch(permission)
             }
         }
+    }
+
+    if (state.success) {
+        AlertDialog(
+            onDismissRequest = navigateToHome,
+            confirmButton = {
+                TextButton(onClick = navigateToHome) {
+                    Text(stringResource(R.string.common_ok))
+                }
+            },
+            title = { Text(stringResource(R.string.timeline_new_post_success_title)) },
+            text = { Text(stringResource(R.string.timeline_new_post_success_message)) }
+        )
     }
 
     TimelineNewPostContent(
@@ -154,7 +178,7 @@ fun TimelineNewPostContent(
                         shape = MaterialTheme.shapes.medium,
                     )
                     .fillMaxWidth()
-                    .height(200.dp),
+                    .height(dimensionResource(R.dimen.socially_post_default_image_height)),
             ) {
                 if (state.isImageUploaded) {
                     Box(
@@ -171,25 +195,32 @@ fun TimelineNewPostContent(
                         SociallyElevatedButton(
                             icon = Icons.Default.Delete,
                             onClick = onDeleteImage,
+                            enabled = state.interactionEnabled,
                             shape = CircleShape,
                             modifier = Modifier
-                                .size(40.dp)
-                                .padding(end = 8.dp, bottom = 8.dp)
+                                .size(dimensionResource(R.dimen.socially_floating_button_size))
+                                .padding(
+                                    end = dimensionResource(R.dimen.padding_s),
+                                    bottom = dimensionResource(R.dimen.padding_s),
+                                ),
                         )
                     }
                 } else {
+                    val columnModifier = if (state.interactionEnabled) Modifier
+                        .fillMaxSize()
+                        .clickable { onUploadImage() }
+                    else Modifier.fillMaxSize()
+
                     Column(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .clickable { onUploadImage() }
+                        modifier = columnModifier,
                     ) {
                         Image(
                             painter = painterResource(R.drawable.img_image_placeholder),
                             contentDescription = null,
                             modifier = Modifier
-                                .size(60.dp)
+                                .size(dimensionResource(R.dimen.socially_post_placeholder_image_height)),
                         )
                         Text(
                             text = stringResource(R.string.timeline_new_post_upload_image),
@@ -217,6 +248,7 @@ fun TimelineNewPostContent(
                         bringIntoViewRequester.bringIntoView()
                     }
                 },
+                enabled = state.interactionEnabled,
                 maxLines = Int.MAX_VALUE,
                 placeholder = stringResource(R.string.timeline_new_post_type_here),
                 modifier = Modifier
@@ -228,10 +260,24 @@ fun TimelineNewPostContent(
             SociallyButtonPrimary(
                 text = stringResource(R.string.timeline_new_post_post),
                 onClick = onPost,
+                enabled = state.isPostButtonEnabled,
                 modifier = Modifier
                     .padding(top = dimensionResource(R.dimen.padding_m))
                     .height(dimensionResource(R.dimen.socially_button_height)),
             )
+
+            if (state.isLoading) {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                ) {
+                    CircularProgressIndicator(
+                        modifier = Modifier
+                            .padding(top = dimensionResource(R.dimen.padding_l)),
+                    )
+                }
+            }
         }
     }
 }

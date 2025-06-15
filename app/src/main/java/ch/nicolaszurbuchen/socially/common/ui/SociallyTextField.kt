@@ -34,6 +34,7 @@ fun SociallyTextField(
     onValueChange: (String) -> Unit,
     placeholder: String,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     leadingIcon: Painter? = null,
     maxLines: Int = 1,
     supportingText: String? = null,
@@ -52,6 +53,7 @@ fun SociallyTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
+        enabled = enabled,
         placeholder = { Text(placeholder) },
         leadingIcon = leadingIcon?.let {
             {

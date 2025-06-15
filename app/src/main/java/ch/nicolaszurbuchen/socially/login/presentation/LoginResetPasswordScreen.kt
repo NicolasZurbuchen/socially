@@ -57,7 +57,7 @@ fun LoginResetPasswordScreen(
             onDismissRequest = navigateToSignIn,
             confirmButton = {
                 TextButton(onClick = navigateToSignIn) {
-                    Text(stringResource(R.string.login_password_reset_ok))
+                    Text(stringResource(R.string.common_ok))
                 }
             },
             title = { Text(stringResource(R.string.login_password_reset_confirmation_title)) },
