@@ -2,7 +2,7 @@ package ch.nicolaszurbuchen.socially.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.login.domain.LoginResetPasswordUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthResetPasswordUseCase
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginResetPasswordState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginResetPasswordViewModel @Inject constructor(
-    private val resetPasswordUseCase: LoginResetPasswordUseCase,
+    private val resetPasswordUseCase: AuthResetPasswordUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(LoginResetPasswordState())

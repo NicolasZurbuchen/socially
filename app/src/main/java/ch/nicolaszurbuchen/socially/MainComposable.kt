@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,44 +20,57 @@ import ch.nicolaszurbuchen.socially.timeline.presentation.TimelineNewPostScreen
 @Composable
 fun MainComposable(
     navController: NavHostController = rememberNavController(),
+    viewModel: MainViewModel = hiltViewModel()
 ) {
+    val startDestination = viewModel.startDestination
+
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
-        NavHost(
-            navController = navController,
-            startDestination = Screen.IntroWelcomeScreen.route,
-        ) {
-            composable(Screen.IntroWelcomeScreen.route) {
-                IntroWelcomeScreen(
-                    navController = navController,
-                )
-            }
-            composable(Screen.LoginSignUpScreen.route) {
-                LoginSignUpScreen(
-                    navController = navController,
-                )
-            }
-            composable(Screen.LoginSignInScreen.route) {
-                LoginSignInScreen(
-                    navController = navController,
-                )
-            }
-            composable(Screen.LoginResetPasswordScreen.route) {
-                LoginResetPasswordScreen(
-                    navController = navController,
-                )
-            }
-            composable(Screen.TimelineHomeScreen.route) {
-                TimelineHomeScreen(
-                    navController = navController,
-                )
-            }
-            composable(Screen.TimelineNewPostScreen.route) {
-                TimelineNewPostScreen(
-                    navController = navController,
-                )
+        if (startDestination != null) {
+            NavHost(
+                navController = navController,
+                startDestination = startDestination,
+            ) {
+                composable(Screen.IntroWelcomeScreen.route) {
+                    IntroWelcomeScreen(
+                        navController = navController,
+                    )
+                }
+                composable(Screen.LoginSignUpScreen.route) {
+                    LoginSignUpScreen(
+                        navController = navController,
+                    )
+                }
+                composable(Screen.LoginSignInScreen.route) {
+                    LoginSignInScreen(
+                        navController = navController,
+                    )
+                }
+                composable(Screen.LoginResetPasswordScreen.route) {
+                    LoginResetPasswordScreen(
+                        navController = navController,
+                    )
+                }
+                composable(Screen.TimelineHomeScreen.route) {
+                    TimelineHomeScreen(
+                        navController = navController,
+                    )
+                }
+                composable(Screen.TimelineNewPostScreen.route) {
+                    TimelineNewPostScreen(
+                        navController = navController,
+                    )
+                }
+
+                // TODO remember login
+                // TODO event pour naviguer
+                // TODO automatic focus
+                // TODO field validation
+                // TODO error management
+                // TODO tests
+                // TODO lock orientation
             }
         }
     }

@@ -24,6 +24,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -44,9 +45,19 @@ fun TimelineHomeScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
+    val eventFlow = viewModel.eventFlow
+
+    LaunchedEffect(true) {
+        eventFlow.collect {
+            navController.navigate(Screen.IntroWelcomeScreen.route) {
+                popUpTo(0) { inclusive = true}
+            }
+        }
+    }
+
     TimelineHomeScreenContent(
         state = state,
-        onLogout = viewModel::logout,
+        onLogout = viewModel::signOut,
         onRefresh = viewModel::refresh,
         onLoadNextPage = viewModel::loadNextPage,
         onCreateNewPost = { navController.navigate(Screen.TimelineNewPostScreen.route) }

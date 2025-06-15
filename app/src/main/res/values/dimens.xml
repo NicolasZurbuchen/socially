@@ -31,11 +31,4 @@
     <dimen name="size_level_9">90dp</dimen>
     <dimen name="size_level_10">100dp</dimen>
     <dimen name="size_level_20">200dp</dimen>
-
-    <dimen name="size_level_7">70dp</dimen>
-    <dimen name="size_level_4">40dp</dimen>
-    <dimen name="size_level_9">90dp</dimen>
-    <dimen name="size_level_7">70dp</dimen>
-    <dimen name="size_level_20">200dp</dimen>
-    <dimen name="size_level_7">60dp</dimen>
 </resources>

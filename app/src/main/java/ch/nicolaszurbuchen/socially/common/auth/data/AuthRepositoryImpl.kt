@@ -1,14 +1,18 @@
-package ch.nicolaszurbuchen.socially.login.data
+package ch.nicolaszurbuchen.socially.common.auth.data
 
-import ch.nicolaszurbuchen.socially.login.domain.LoginRepository
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
-class LoginRepositoryImpl(
+class AuthRepositoryImpl(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
-): LoginRepository {
+): AuthRepository {
+
+    override suspend fun isUserSignedIn(): Boolean {
+        return auth.currentUser != null
+    }
 
     override suspend fun signUp(username: String, email: String, password: String): Result<Unit> {
         return try {
@@ -43,5 +47,9 @@ class LoginRepositoryImpl(
         } catch (e: Exception) {
             Result.failure(e)
         }
+    }
+
+    override suspend fun signOut() {
+        auth.signOut()
     }
 }

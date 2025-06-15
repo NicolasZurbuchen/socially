@@ -2,7 +2,7 @@ package ch.nicolaszurbuchen.socially.login.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.login.domain.LoginSignUpUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignUpUseCase
 import ch.nicolaszurbuchen.socially.login.presentation.model.LoginSignUpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginSignUpViewModel @Inject constructor(
-    private val signUpUseCase: LoginSignUpUseCase,
+    private val signUpUseCase: AuthSignUpUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(LoginSignUpState())

@@ -1,7 +1,7 @@
-package ch.nicolaszurbuchen.socially.login.domain
+package ch.nicolaszurbuchen.socially.common.auth.domain
 
-class LoginSignUpUseCase(
-    private val repository: LoginRepository,
+class AuthSignUpUseCase(
+    private val repository: AuthRepository,
 ) {
     suspend operator fun invoke(username: String, email: String, password: String): Result<Unit> {
         return repository.signUp(username, email, password)
