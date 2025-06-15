@@ -94,7 +94,7 @@ fun TimelineHomeScreenContent(
         }
     ) { paddingValues ->
         PullToRefreshBox(
-            isRefreshing = state.isLoadingMore,
+            isRefreshing = state.isRefreshing,
             onRefresh = onRefresh,
             modifier = Modifier
                 .fillMaxSize()
@@ -135,6 +135,10 @@ fun TimelineHomeScreenContent(
             FloatingActionButton(
                 onClick = onCreateNewPost,
                 modifier = Modifier
+                    .padding(
+                        end = dimensionResource(R.dimen.padding_l),
+                        bottom = dimensionResource(R.dimen.padding_l),
+                    )
                     .align(Alignment.BottomEnd),
             ) {
                 Icon(

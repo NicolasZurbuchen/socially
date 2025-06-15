@@ -1,9 +1,11 @@
 package ch.nicolaszurbuchen.socially.timeline.presentation.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -23,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import ch.nicolaszurbuchen.socially.R
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
 import ch.nicolaszurbuchen.socially.ui.theme.SociallyTheme
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 
 @Composable
 fun TimelineHomePost(
@@ -84,9 +87,28 @@ fun TimelineHomePost(
             }
 
             if (state.hasImage) {
-                AsyncImage(
+                SubcomposeAsyncImage(
                     model = state.imageUrl,
                     contentDescription = null,
+                    loading = {
+                        Box(
+                            contentAlignment = Alignment.Center,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(
+                                    color = MaterialTheme.colorScheme.secondary,
+                                    shape = MaterialTheme.shapes.medium,
+                                ),
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.img_image_placeholder),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(vertical = dimensionResource(R.dimen.padding_l))
+                                    .size(dimensionResource(R.dimen.socially_post_placeholder_image_height)),
+                            )
+                        }
+                    },
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(MaterialTheme.shapes.medium)
