@@ -17,6 +17,8 @@ googleServices = "4.4.2"
 composeIcons = "1.7.8"
 firebaseStorageKtx = "21.0.2"
 coil = "2.7.0"
+mockk = "1.13.5"
+coroutines = "1.7.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -41,6 +43,8 @@ firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-fires
 compose-icons = { module = "androidx.compose.material:material-icons-extended", version = "composeIcons" }
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
