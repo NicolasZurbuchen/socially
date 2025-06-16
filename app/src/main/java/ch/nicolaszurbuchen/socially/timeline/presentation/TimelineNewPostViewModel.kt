@@ -1,5 +1,6 @@
 package ch.nicolaszurbuchen.socially.timeline.presentation
 
+import android.content.Context
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -33,11 +34,16 @@ class TimelineNewPostViewModel @Inject constructor(
         _state.update { it.copy(imageUri = null) }
     }
 
-    fun post() {
+    fun post(context: Context) {
+        val state = _state.value
+
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, hasError = false) }
 
-            val result = createNewPostUseCase(_state.value.post, _state.value.imageUri)
+            val imageStream = state.imageUri?.let {
+                context.contentResolver.openInputStream(it)
+            }
+            val result = createNewPostUseCase(state.post, imageStream)
 
             _state.update {
                 if (result.isSuccess) {

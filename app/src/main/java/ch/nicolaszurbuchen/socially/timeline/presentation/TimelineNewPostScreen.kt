@@ -127,7 +127,7 @@ fun TimelineNewPostScreen(
         onUploadImage = { pickImage() },
         onDeleteImage = viewModel::deleteImage,
         onPostChange = viewModel::updatePost,
-        onPost = viewModel::post,
+        onPost = { viewModel.post(context) },
     )
 }
 

@@ -1,13 +1,13 @@
 package ch.nicolaszurbuchen.socially.timeline.domain.use_case
 
-import android.net.Uri // TODO not good
 import ch.nicolaszurbuchen.socially.timeline.domain.TimelineRepository
+import java.io.InputStream
 import javax.inject.Inject
 
 class TimelineCreateNewPostUseCase @Inject constructor(
     private val repository: TimelineRepository,
 ) {
-    suspend operator fun invoke(title: String?, imageUri: Uri?): Result<Unit> {
-        return repository.createNewPost(title, imageUri)
+    suspend operator fun invoke(title: String?, imageStream: InputStream?): Result<Unit> {
+        return repository.createNewPost(title, imageStream)
     }
 }
