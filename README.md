@@ -24,10 +24,7 @@
 
 ## 🖼️ Showcase
 
-<img src="assets/socially-welcome.png" width="150" style="border-radius: 12px;">
-<img src="assets/socially-signup.png" width="150" style="border-radius: 12px;">
-<img src="assets/socially-timeline.png" width="150" style="border-radius: 12px;">
-<img src="assets/socially-newpost.png" width="150" style="border-radius: 12px;">
+<img src="assets/socially-welcome.png" width="150">  <img src="assets/socially-signup.png" width="150">  <img src="assets/socially-timeline.png" width="150">  <img src="assets/socially-newpost.png" width="150">
 
 ## 🧱 Tech Stack
 
