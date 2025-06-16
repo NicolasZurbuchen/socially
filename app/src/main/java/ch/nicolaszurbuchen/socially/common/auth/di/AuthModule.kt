@@ -1,12 +1,12 @@
 package ch.nicolaszurbuchen.socially.common.auth.di
 
 import ch.nicolaszurbuchen.socially.common.auth.data.AuthRepositoryImpl
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthIsSignedInUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthIsSignedInUseCase
 import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthResetPasswordUseCase
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignInUseCase
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignOutUseCase
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignUpUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthResetPasswordUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthSignInUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthSignOutUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthSignUpUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module

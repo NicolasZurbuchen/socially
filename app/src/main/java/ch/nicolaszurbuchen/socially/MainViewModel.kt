@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthIsSignedInUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthIsSignedInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

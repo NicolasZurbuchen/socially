@@ -1,6 +1,7 @@
-package ch.nicolaszurbuchen.socially.timeline.domain
+package ch.nicolaszurbuchen.socially.timeline.domain.use_case
 
 import android.net.Uri // TODO not good
+import ch.nicolaszurbuchen.socially.timeline.domain.TimelineRepository
 import javax.inject.Inject
 
 class TimelineCreateNewPostUseCase @Inject constructor(

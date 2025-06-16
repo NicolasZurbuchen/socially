@@ -1,5 +1,6 @@
-package ch.nicolaszurbuchen.socially.timeline.domain
+package ch.nicolaszurbuchen.socially.timeline.domain.use_case
 
+import ch.nicolaszurbuchen.socially.timeline.domain.TimelineRepository
 import ch.nicolaszurbuchen.socially.timeline.domain.model.TimelineHomeEntity
 import com.google.firebase.firestore.DocumentSnapshot
 import javax.inject.Inject

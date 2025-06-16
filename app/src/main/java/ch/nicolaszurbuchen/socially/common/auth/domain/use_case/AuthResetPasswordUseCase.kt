@@ -1,5 +1,6 @@
-package ch.nicolaszurbuchen.socially.common.auth.domain
+package ch.nicolaszurbuchen.socially.common.auth.domain.use_case
 
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
 import ch.nicolaszurbuchen.socially.common.utils.DomainError
 import ch.nicolaszurbuchen.socially.common.utils.Resource
 import ch.nicolaszurbuchen.socially.common.utils.isEmailValid

@@ -1,5 +1,6 @@
-package ch.nicolaszurbuchen.socially.common.auth.domain
+package ch.nicolaszurbuchen.socially.common.auth.domain.use_case
 
+import ch.nicolaszurbuchen.socially.common.auth.domain.AuthRepository
 import javax.inject.Inject
 
 class AuthSignOutUseCase @Inject constructor(

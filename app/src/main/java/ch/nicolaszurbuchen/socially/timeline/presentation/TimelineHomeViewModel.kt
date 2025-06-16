@@ -2,8 +2,8 @@ package ch.nicolaszurbuchen.socially.timeline.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.common.auth.domain.AuthSignOutUseCase
-import ch.nicolaszurbuchen.socially.timeline.domain.TimelineGetPostsUseCase
+import ch.nicolaszurbuchen.socially.common.auth.domain.use_case.AuthSignOutUseCase
+import ch.nicolaszurbuchen.socially.timeline.domain.use_case.TimelineGetPostsUseCase
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomePostState
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineHomeState
 import dagger.hilt.android.lifecycle.HiltViewModel

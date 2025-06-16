@@ -3,7 +3,7 @@ package ch.nicolaszurbuchen.socially.timeline.presentation
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.nicolaszurbuchen.socially.timeline.domain.TimelineCreateNewPostUseCase
+import ch.nicolaszurbuchen.socially.timeline.domain.use_case.TimelineCreateNewPostUseCase
 import ch.nicolaszurbuchen.socially.timeline.presentation.model.TimelineNewPostState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

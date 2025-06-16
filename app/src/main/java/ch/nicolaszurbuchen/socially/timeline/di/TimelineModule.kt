@@ -1,8 +1,8 @@
 package ch.nicolaszurbuchen.socially.timeline.di
 
 import ch.nicolaszurbuchen.socially.timeline.data.TimelineRepositoryImpl
-import ch.nicolaszurbuchen.socially.timeline.domain.TimelineCreateNewPostUseCase
-import ch.nicolaszurbuchen.socially.timeline.domain.TimelineGetPostsUseCase
+import ch.nicolaszurbuchen.socially.timeline.domain.use_case.TimelineCreateNewPostUseCase
+import ch.nicolaszurbuchen.socially.timeline.domain.use_case.TimelineGetPostsUseCase
 import ch.nicolaszurbuchen.socially.timeline.domain.TimelineRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
