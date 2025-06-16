@@ -16,14 +16,14 @@ class AuthIsSignedInUseCaseTest : AuthBaseUseCase() {
     }
 
     @Test
-    fun `isUserSignedIn returns true if signed in`() = runTest {
+    fun `isSignedIn returns true if signed in`() = runTest {
         fakeRepository.signedIn = true
         val result = useCase()
         assertTrue(result)
     }
 
     @Test
-    fun `isUserSignedIn returns false if not signed in`() = runTest {
+    fun `isSignedIn returns false if not signed in`() = runTest {
         fakeRepository.signedIn = false
         val result = useCase()
         assertFalse(result)
