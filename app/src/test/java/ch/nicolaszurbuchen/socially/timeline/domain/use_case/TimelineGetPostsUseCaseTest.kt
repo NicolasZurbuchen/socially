@@ -1,6 +1,5 @@
 package ch.nicolaszurbuchen.socially.timeline.domain.use_case
 
-import ch.nicolaszurbuchen.socially.timeline.domain.TimelineRepositoryFake
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
