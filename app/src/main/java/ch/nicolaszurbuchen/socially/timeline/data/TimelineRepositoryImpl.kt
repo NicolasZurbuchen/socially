@@ -61,8 +61,13 @@ class TimelineRepositoryImpl(
             val postsSnapshot = query.get().await()
 
             val postDocs = postsSnapshot.documents
-            val userIds = postDocs.mapNotNull { it.getString("userId") }.distinct()
+            val last = postDocs.lastOrNull()
 
+            if (postDocs.isEmpty()) {
+                return Result.success(TimelineHomeEntity(emptyList(), last, false))
+            }
+
+            val userIds = postDocs.mapNotNull { it.getString("userId") }.distinct()
             val usersSnapshot = firestore.collection("users")
                 .whereIn(FieldPath.documentId(), userIds)
                 .get().await()
@@ -84,8 +89,8 @@ class TimelineRepositoryImpl(
                 )
             }
 
-            val last = postsSnapshot.documents.lastOrNull()
-            Result.success(TimelineHomeEntity(posts, last, true))
+            val hasMore = posts.size == pageSize
+            Result.success(TimelineHomeEntity(posts, last, hasMore))
 
         } catch (e: Exception) {
             Result.failure(e)
